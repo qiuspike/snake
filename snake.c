@@ -25,10 +25,11 @@ init()
 	food.x = 0;
 	food.y = 0;
 	// interval timer value
-	delay = 200;
+	delay = 150;
 
-	p1.x = 5;
+	p1.x = 5; // defualt position
 	p1.y = 5;
+
 	Q = (queue)malloc(sizeof(struct q_node));
 	init_queue(Q);
 	front_enqueue(p1, Q);
@@ -50,13 +51,10 @@ init()
 void
 snake_move()	//TODO
 {
-	// if (position.x > COLS)
-
-	// for the node next front
-	// need one more method to just get front node pos
-	p1 = get_front(Q); // haven't been implemented
-	p1.x += dir.x;
+	p1 = get_front(Q); // get the front node of the snake
 	p1.y += dir.y;
+	p1.x += dir.x;
+
 	// cross the border at right and left
 	if (p1.x > COLS-1)
 		p1.x = 0;
@@ -68,8 +66,21 @@ snake_move()	//TODO
 	else if (p1.y < 0)
 		p1.y = LINES-1;
 
+	// For p1 the new position, search if there any one equal to it at the
+	// snake queue, if true, then the snake dies.
+	// TODO some bugs
+	if (is_exist(p1, Q)) { // the snake dies.
+		move(10, 20); // move to the middle
+		addstr("Game Over!"); // can be replaced by mvaddstr()
+		move(LINES-1, COLS-1);
+		refresh();
+		sleep(5);
+		end();
+		exit(0);	// exit the program
+	}
+
 	front_enqueue(p1, Q);
-	move(p1.y, p1.x);
+	move(p1.y, p1.x); // can be replaced by mvaddch()
 	addch(SHAPE);
 
 	if ((p1.x == food.x) && (p1.y == food.y))	// 1 for eat, 0 for not eat
