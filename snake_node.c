@@ -20,6 +20,12 @@ destroy_queue(queue Q)
 	}
 }
 
+position	// TODO
+get_front(queue Q)
+{
+	return Q->front->pos;
+}
+
 void
 front_enqueue(position X, queue Q)
 {

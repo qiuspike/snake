@@ -5,6 +5,8 @@
 #include "snake.h"
 
 
+
+
 void
 init()
 {
@@ -34,6 +36,7 @@ init()
 
 	move(p1.y, p1.x);
 	addch(SHAPE);
+	produce_food(); //
 	move(LINES-1, COLS-1);
 	refresh();
 
@@ -47,33 +50,29 @@ init()
 void	// default moving dir: right.
 snake_move()	//TODO
 {
-	//
 	// if (position.x > COLS)
 
-	p1 = rear_dequeue(Q);
-	move(p1.y, p1.x);
-	addch(BLANK);
+	// for the node next front
+	// need one more method to just get front node pos
+	p1 = get_front(Q); // haven't been implemented
 	p1.x += dir.x;
 	p1.y += dir.y;
+	front_enqueue(p1, Q);
 	move(p1.y, p1.x);
 	addch(SHAPE);
-	move(LINES-1, COLS-1);
+
+	if ((p1.x == food.x) && (p1.y == food.y))	// 1 for eat, 0 for not eat
+		produce_food();
+	else {
+		p1 = rear_dequeue(Q);
+		move(p1.y, p1.x);
+		addch(BLANK);
+		move(LINES-1, COLS-1);
+	}
+
 	refresh();
-
-	front_enqueue(p1, Q);
-	signal(SIGALRM, snake_move);
-
-	// if ()	// after eat TODO
-		// produce_food();
+	signal(SIGALRM, snake_move); // set the signal again
 }
-
-/*
-void
-eat()
-{
-
-}
-*/
 
 //TODO
 void
@@ -84,13 +83,12 @@ produce_food()	//TODO one more timer for the food
 	move(food.y, food.x);
 	addch(FOOD);
 	move(LINES-1, COLS-1);
-	refresh();
 }
 
 int
 set_ticker(int n_msecs)	// Set the interval timer
-{
-	struct itimerval new_timeset;
+{							// TODO it is just ok, but for a snake with level,
+	struct itimerval new_timeset; // there have many things to do.
 	long n_sec, n_usecs;
 
 	n_sec = n_msecs / 1000;

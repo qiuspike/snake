@@ -35,6 +35,7 @@ struct q_node {
 // Operation for the snake node
 void init_queue(queue Q);	// init a queue
 void destroy_queue(queue Q);	// destroy a queue
+position get_front(queue Q);
 void front_enqueue(position X, queue Q);	// enqueue X at front
 position rear_dequeue(queue Q);	// dequeue from rear
 // End
@@ -55,13 +56,12 @@ int set_ticker(int);
 // reset terminal and free memory
 void end();
 
-// void eat();
 
 // void death();
 // reset the terminal environment and free memory
 // void end();
 
-
+// TODO where to set them? Is this a sytax(?) of cpp but not pure c?
 // Some global vars
 int delay, ndelay;	// delay for timer value and interval
 int hour, min, sec;
@@ -71,8 +71,6 @@ position dir;	  // dir for where the snake go
 position food;	 // food for the positionition of the food
 position p1;		// tmp store
 queue Q;	   // define queue
-
-
 
 #endif
 //	SNAKE_H
