@@ -1,3 +1,6 @@
+//
+// Why this file is not pure C???
+//
 #ifndef SNAKE_H
 #define SNAKE_H
 
@@ -6,6 +9,15 @@
 #define  BLANK  ' '
 #define  FOOD   '@'
 
+// Global curses vars
+// KEY_UP
+// KEY_DOWN
+// KEY_LEFT
+// KEY_RIGHT
+
+// COLS
+// LINES
+// End global curses vars
 
 // The struct for positionition
 typedef struct {
@@ -48,6 +60,8 @@ void fatal_error(const char s[]);
 
 // init the terminal environment
 void init();
+// get input order
+void get_order();
 // the moving of the snake
 void snake_move();
 // random produce food
