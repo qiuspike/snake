@@ -20,6 +20,22 @@ destroy_queue(queue Q)
 	}
 }
 
+int
+is_exist(position X, queue Q)
+{
+	ptr_snake s;
+
+	s = Q->front; // TODO
+	while (s->next != NULL) {
+		if (s->pos.x == X.x && s->pos.y == X.y)
+			return 1;
+		else
+			s = s->next;
+	}
+
+	return 0;
+}
+
 position	// TODO
 get_front(queue Q)
 {
@@ -76,6 +92,7 @@ rear_dequeue(queue Q)
 }
 
 // For error handling
+// TODO The error info should be writen to file as the journal.
 void
 fatal_error(const char s[])
 {
