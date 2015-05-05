@@ -6,7 +6,6 @@
 
 
 
-
 void
 init()
 {
@@ -36,8 +35,9 @@ init()
 
 	move(p1.y, p1.x);
 	addch(SHAPE);
-	produce_food(); //
 	move(LINES-1, COLS-1);
+	refresh();
+	produce_food();	// TODO food before snake
 	refresh();
 
 	// Signal and ticker TODO
@@ -47,7 +47,7 @@ init()
 
 
 // This func is for signal
-void	// default moving dir: right.
+void
 snake_move()	//TODO
 {
 	// if (position.x > COLS)
@@ -57,6 +57,17 @@ snake_move()	//TODO
 	p1 = get_front(Q); // haven't been implemented
 	p1.x += dir.x;
 	p1.y += dir.y;
+	// cross the border at right and left
+	if (p1.x > COLS-1)
+		p1.x = 0;
+	else if (p1.x < 0)
+		p1.x = COLS-1;
+	// cross the border at down and up
+	if (p1.y > LINES-1)
+		p1.y = 0;
+	else if (p1.y < 0)
+		p1.y = LINES-1;
+
 	front_enqueue(p1, Q);
 	move(p1.y, p1.x);
 	addch(SHAPE);
@@ -76,8 +87,11 @@ snake_move()	//TODO
 
 //TODO
 void
-produce_food()	//TODO one more timer for the food
+produce_food()
 {
+	// TODO Is there any better to produce random?
+	// This is just a fake random that every time run the program
+	// the random is the same as before.
 	food.x = rand() % COLS;	//COLS AND LINES IN THE TERMINAL
 	food.y = rand() % (LINES - 1); //use one line to show some info.
 	move(food.y, food.x);
