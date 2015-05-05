@@ -1,7 +1,4 @@
-#include <stdlib.h>
 #include <curses.h>
-#include <signal.h>
-#include <sys/time.h>
 #include "snake.h"
 
 // Global curses vars
@@ -23,19 +20,21 @@ main()
 	init();
 	// Decide direct and 'q' to quit
 	while ((ch = getch()) != 'q') {
-		if (ch == KEY_UP) {
+		// How miraculous is this!
+		// equal to zero for the direction control
+		if (ch == KEY_UP && dir.y == 0) {
 			dir.y = -1;
 			dir.x = 0;
 		}
-		if (ch == KEY_DOWN) {
+		if (ch == KEY_DOWN && dir.y == 0) {
 			dir.y = +1;
 			dir.x = 0;
 		}
-		if (ch == KEY_LEFT) {
+		if (ch == KEY_LEFT && dir.x == 0) {
 			dir.y = 0;
 			dir.x = -1;
 		}
-		if (ch == KEY_RIGHT) {
+		if (ch == KEY_RIGHT && dir.x == 0) {
 			dir.y = 0;
 			dir.x = +1;
 		}
