@@ -4,7 +4,11 @@
 #include <sys/time.h>
 #include "snake.h"
 
-
+extern int delay;// delay for timer value and interval
+extern position dir;	  // dir for where the snake go
+extern position food;	 // food for the positionition of the food
+extern position p1;		// tmp store
+extern queue Q;	   // define queue
 
 void
 init()

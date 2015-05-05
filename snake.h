@@ -63,10 +63,10 @@ void end();
 
 // TODO where to set them? Is this a sytax(?) of cpp but not pure c?
 // Some global vars
-int delay;// delay for timer value and interval
 // int hour, min, sec;
 // int level;
 
+int delay;// delay for timer value and interval
 position dir;	  // dir for where the snake go
 position food;	 // food for the positionition of the food
 position p1;		// tmp store
