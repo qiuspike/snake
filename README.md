@@ -1,5 +1,6 @@
 # snake
 一个纯C实现的，在UNIX终端下运行的贪吃蛇程序。
+用UNIX的curses.h库来实现对终端的控制。
 在Linux等系统终端下，直接使用命令：
 gcc mian.c snake.c snake_node.c -o snake -lcurses
 编译链接程序，然后直接:
