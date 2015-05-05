@@ -1,6 +1,7 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <time.h>
 #include <sys/time.h>
 #include "snake.h"
 
@@ -134,7 +135,7 @@ produce_food()
 {
 	// TODO Is there any better to produce random?
 	// This is just a fake random that every time run the program
-	// the random is the same as before.
+	srand((unsigned int)time(NULL));
 	food.x = rand() % COLS;	//COLS AND LINES IN THE TERMINAL
 	food.y = rand() % (LINES - 1); //use one line to show some info.
 	move(food.y, food.x);
