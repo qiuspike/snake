@@ -20,10 +20,10 @@
 // End global curses vars
 
 // The struct for positionition
-struct position {
+typedef struct pos_node {
 	int x;  // x to col
 	int y;  // y to row
-};
+} position;
 
 
 // The struct of snake node
@@ -33,7 +33,7 @@ typedef struct snake  *ptr_snake;
 typedef struct q_node *queue;
 
 struct snake {
-	struct position pos;
+	position pos;
 	ptr_snake pre;
 	ptr_snake next;
 };
@@ -81,9 +81,9 @@ void end();
 // int level;
 
 int delay;// delay for timer value and interval
-struct position dir;	  // dir for where the snake go
-struct position food;	 // food for the positionition of the food
-struct position p1;		// tmp store
+position dir;	  // dir for where the snake go
+position food;	 // food for the positionition of the food
+position p1;		// tmp store
 queue Q;	   // define queue
 
 #endif
