@@ -39,7 +39,7 @@ init()
 
 	Q = (queue)malloc(sizeof(struct q_node));
 	if (Q == NULL)
-		fatal_error("Fatal Error: Out of space!");
+		fatal_error("Fatal Error: Out of space!\n");
 
 	init_queue(Q);
 	front_enqueue(p1, Q);
@@ -106,10 +106,11 @@ snake_move()	//TODO
 	// snake queue, if true, then the snake dies.
 	// TODO some bugs
 	if (is_exist(p1, Q)) { // the snake dies.
-		move(10, 20); // move to the middle
-		addstr("Game Over!"); // can be replaced by mvaddstr()
+		// move(10, 20); // move to the middle
+		mvaddstr(10, 20, "Game Over: Bump against itself!"); // can be replaced by mvaddstr()
 		move(LINES-1, COLS-1);
 		refresh();
+		logging("Game Over: Bump against itself!\n");
 		sleep(5);
 		end();
 		exit(0);	// exit the program
