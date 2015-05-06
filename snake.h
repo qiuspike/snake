@@ -33,7 +33,7 @@ typedef struct snake  *ptr_snake;
 typedef struct q_node *queue;
 
 struct snake {
-	position pos;
+	struct position pos;
 	ptr_snake pre;
 	ptr_snake next;
 };
