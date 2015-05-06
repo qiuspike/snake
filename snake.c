@@ -6,11 +6,11 @@
 #include "snake.h"
 
 
-extern int delay;// delay for timer value and interval
-extern position dir;	  // dir for where the snake go
-extern position food;	 // food for the positionition of the food
-extern position p1;		// tmp store
-extern queue Q;	   // define queue
+int delay;// delay for timer value and interval
+position dir;	  // dir for where the snake go
+position food;	 // food for the positionition of the food
+position p1;		// tmp store
+queue Q;	   // define queue
 
 
 void
@@ -38,6 +38,9 @@ init()
 	p1.y = 5;
 
 	Q = (queue)malloc(sizeof(struct q_node));
+	if (Q == NULL)
+		fatal_error("Fatal Error: Out of space!");
+
 	init_queue(Q);
 	front_enqueue(p1, Q);
 
@@ -137,7 +140,7 @@ produce_food()
 	// This is just a fake random that every time run the program
 	srand((unsigned int)time(NULL));
 	food.x = rand() % COLS;	//COLS AND LINES IN THE TERMINAL
-	food.y = rand() % (LINES - 1); //use one line to show some info.
+	food.y = rand() % (LINES - 1); // TODO use one line to show some info.
 	move(food.y, food.x);
 	addch(FOOD);
 	move(LINES-1, COLS-1);

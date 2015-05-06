@@ -45,17 +45,18 @@ struct q_node {
 };
 
 // Operation for the snake node
-void init_queue(queue Q);	// init a queue
-void destroy_queue(queue Q);	// destroy a queue
-int is_exist(position X, queue Q); // search if X exist in queue Q, 1 or 0
-position get_front(queue Q);
-void front_enqueue(position X, queue Q);	// enqueue X at front
-position rear_dequeue(queue Q);	// dequeue from rear
+void init_queue(queue);	// init a queue
+void destroy_queue(queue);	// destroy a queue
+int is_exist(position, queue); // search if X exist in queue Q, 1 or 0
+position get_front(queue);
+void front_enqueue(position, queue);	// enqueue X at front
+position rear_dequeue(queue);	// dequeue from rear
 // End
 
 // For error handling
-void error(const char s[]);
-void fatal_error(const char s[]);
+void error(const char*);
+void fatal_error(const char*);
+void logging(const char*);	// log time and the error reason
 // End
 
 // init the terminal environment
@@ -79,12 +80,6 @@ void end();
 // Some global vars
 // int hour, min, sec;
 // int level;
-
-int delay;// delay for timer value and interval
-position dir;	  // dir for where the snake go
-position food;	 // food for the positionition of the food
-position p1;		// tmp store
-queue Q;	   // define queue
 
 #endif
 //	SNAKE_H

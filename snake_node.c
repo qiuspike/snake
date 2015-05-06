@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include "snake.h"
 
 
@@ -49,7 +51,7 @@ front_enqueue(position X, queue Q)
 
 	tmp = (ptr_snake)malloc(sizeof(struct snake));
 	if (tmp == NULL)
-		fatal_error("Out of space!");
+		fatal_error("Fatal Error: Out of space!");
 
 	if (Q->front == NULL) {		//Enqueue the first element
 		tmp->pos = X;
@@ -73,7 +75,7 @@ rear_dequeue(queue Q)
 	position p;
 
 	if (Q->rear == NULL)				 //Empty queue
-		error("Empty queue!");
+		error("Error: Empty queue!");
 	else if (Q->rear == Q->front) {	//Only one element in the queue. //OK?
 		tmp = Q->rear;
 		p = tmp->pos;
@@ -94,16 +96,34 @@ rear_dequeue(queue Q)
 // For error handling
 // TODO The error info should be writen to file as the journal.
 void
-fatal_error(const char s[])
+fatal_error(const char *s)
 {
-	fprintf(stderr, "Fatal errors: %s\n", s);
+	logging(s);
 	exit(-1);
 }
 
 void
-error(const char s[])
+error(const char *s)
 {
-	fprintf(stderr, "errors: %s\n", s);
+	logging(s);
 	exit(0);
 }
+
+
+void
+logging(const char *s)	// TODO
+{
+	FILE *f;
+	time_t timer;
+	char *t;
+
+	timer = time(NULL);
+	t = ctime(&timer);
+
+	f = fopen("snake.log", "a");
+	fwrite(t, sizeof(char), strlen(t), f);
+	fwrite(s, sizeof(char), strlen(s), f);
+	fclose(f);
+}
+
 // End
