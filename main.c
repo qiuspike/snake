@@ -5,11 +5,9 @@ int
 main()
 {
 
-	init();
-	get_order();
-	end();
+	init();	// initialize
+	get_order(); // get order from keyboard
+	end();	// end and free memory
 
 	return 0;
 }
-
-
